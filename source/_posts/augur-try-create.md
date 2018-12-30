@@ -6,7 +6,8 @@ tags: Augur
 
 
 [Augurマーケット「2018年中にETHのレートは500ドルを超える？」に参加してみた](https://yuma300.github.io/bitbltmemo/2018/12/20/augur-try-betting/) にて、実際にマーケットに参加してみました。
-今度は自分でマーケットを作ってみました。
+今度は自分で[Augurマーケット「2019年3月23日に行われるF1オーストラリアGPの優勝チームは？」](https://cloudflare-ipfs.com/ipfs/QmRMugnaQg8LFdiKSQb5CGcHhVarUqpt4TXVc4ggAcjb3q/?augur_node=wss%3a%2f%2faugur-node.augur.casino&ethereum_node_ws=wss%3a%2f%2fgethnode.com%2fws#/market?id=0xb5849823fa84949493278cccf17846d875c86f38)を作ってみました。
+
 
 Augurの画面の左側にある `create` ボタンを押します。
 
