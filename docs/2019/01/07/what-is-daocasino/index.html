@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-30987034-18', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <title>Daocasinoとは | びっとぶりっとメモ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ethereum上で動作するギャンブル用プロトコルdaocasinoの説明をします。 トークンについてDaocasinoのプロトコルではBETというトークンが使われます。このトークンは2017年7月に行われたICOにより発行されました。ICO時のトークン価格は1ETH=2000BETで当時の1ETHの価格が30000円くらいなので1BET=15円くらいでした。トークンの総発行量は167,270,8">
+<meta name="keywords" content="daocasino">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Daocasinoとは">
+<meta property="og:url" content="http://yuma300.github.io/bitbltmemo/2019/01/07/what-is-daocasino/index.html">
+<meta property="og:site_name" content="びっとぶりっとメモ">
+<meta property="og:description" content="Ethereum上で動作するギャンブル用プロトコルdaocasinoの説明をします。 トークンについてDaocasinoのプロトコルではBETというトークンが使われます。このトークンは2017年7月に行われたICOにより発行されました。ICO時のトークン価格は1ETH=2000BETで当時の1ETHの価格が30000円くらいなので1BET=15円くらいでした。トークンの総発行量は167,270,8">
+<meta property="og:locale" content="jagit">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/svg/PL1DIyD05BplhrXwRyMRb19G2nxrBXwUwIQ4RhDB4WGL3xjHGGIhWgZqKa4y-56gHH0K_J6lqVelt0qs1hmzPkRDctb9a7166t6mnUgpSquJX0jn40fKW_7hsTVpBgeFCwE-nlGAqpVKBrblr9Yn2mwHuBR1PxIoc2zLw3PnHKUAa8K9NLsMB894HF4QXPWAMUOM86n7WdFsowv7PNO9EeokSDYSqhualgJLgcDiQ9rEHW-eJb2Vehf4VKWCMAivniHmMV_nU-_UGbQUGuKywvxRGTsWrgWFKEsJdNztcso3SI6BqwsoOjxp0XxyjGAF-2qwpONwoVuexNzsZyVllJm4PrvYiXbLaGqyk-6NcgYxoUr5DZpAcpZ6jH3_0000">
+<meta property="og:updated_time" content="2019-01-07T14:23:15.997Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Daocasinoとは">
+<meta name="twitter:description" content="Ethereum上で動作するギャンブル用プロトコルdaocasinoの説明をします。 トークンについてDaocasinoのプロトコルではBETというトークンが使われます。このトークンは2017年7月に行われたICOにより発行されました。ICO時のトークン価格は1ETH=2000BETで当時の1ETHの価格が30000円くらいなので1BET=15円くらいでした。トークンの総発行量は167,270,8">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/svg/PL1DIyD05BplhrXwRyMRb19G2nxrBXwUwIQ4RhDB4WGL3xjHGGIhWgZqKa4y-56gHH0K_J6lqVelt0qs1hmzPkRDctb9a7166t6mnUgpSquJX0jn40fKW_7hsTVpBgeFCwE-nlGAqpVKBrblr9Yn2mwHuBR1PxIoc2zLw3PnHKUAa8K9NLsMB894HF4QXPWAMUOM86n7WdFsowv7PNO9EeokSDYSqhualgJLgcDiQ9rEHW-eJb2Vehf4VKWCMAivniHmMV_nU-_UGbQUGuKywvxRGTsWrgWFKEsJdNztcso3SI6BqwsoOjxp0XxyjGAF-2qwpONwoVuexNzsZyVllJm4PrvYiXbLaGqyk-6NcgYxoUr5DZpAcpZ6jH3_0000">
+  
+    <link rel="alternate" href="/bitbltmemo/atom.xml" title="びっとぶりっとメモ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/bitbltmemo/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/bitbltmemo/" id="logo">びっとぶりっとメモ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/bitbltmemo/" id="subtitle">Dappsとか</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/">Home</a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/bitbltmemo/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yuma300.github.io/bitbltmemo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-what-is-daocasino" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/bitbltmemo/2019/01/07/what-is-daocasino/" class="article-date">
+  <time datetime="2019-01-07T06:53:38.000Z" itemprop="datePublished">2019-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Daocasinoとは
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ethereum上で動作するギャンブル用プロトコル<a href="https://dao.casino/" target="_blank" rel="noopener">daocasino</a>の説明をします。</p>
+<h1 id="トークンについて"><a href="#トークンについて" class="headerlink" title="トークンについて"></a>トークンについて</h1><p>DaocasinoのプロトコルではBETというトークンが使われます。<br>このトークンは2017年7月に行われたICOにより発行されました。<br>ICO時のトークン価格は1ETH=2000BETで当時の1ETHの価格が30000円くらいなので1BET=15円くらいでした。<br>トークンの総発行量は167,270,821BETです。<br>現在このトークンが買えるのは<a href="https://hitbtc.com/exchange/BET-to-ETH" target="_blank" rel="noopener">hitbtc</a>のみです<br>このトークンがどのように使われるかについては後述の<code>仕組み</code>をご覧下さい。</p>
+<h1 id="諸情報"><a href="#諸情報" class="headerlink" title="諸情報"></a>諸情報</h1><p><a href="https://dao.casino/" target="_blank" rel="noopener">ホームページ</a></p>
+<p><a href="https://github.com/DaoCasino" target="_blank" rel="noopener">リポジトリ</a></p>
+<p><a href="https://github.com/DaoCasino/Whitepaper/blob/master/DAO.Casino%20WP.md" target="_blank" rel="noopener">ホワイトペーパー</a></p>
+<p><a href="https://twitter.com/daocasino" target="_blank" rel="noopener">twitterアカウント</a></p>
+<h1 id="紹介動画"><a href="#紹介動画" class="headerlink" title="紹介動画"></a>紹介動画</h1><div class="video-container"><iframe src="//www.youtube.com/embed/7pTZW3Jv5z8" frameborder="0" allowfullscreen></iframe></div>
+<h1 id="仕組み"><a href="#仕組み" class="headerlink" title="仕組み"></a>仕組み</h1><p>Daocasinoでは5つの役割が存在します。 <code>Operators</code>, <code>Bankrollers</code>, <code>Game Developers</code>, <code>Affiliators</code>, <code>Game Players</code> です。</p>
+<img src="http://www.plantuml.com/plantuml/svg/PL1DIyD05BplhrXwRyMRb19G2nxrBXwUwIQ4RhDB4WGL3xjHGGIhWgZqKa4y-56gHH0K_J6lqVelt0qs1hmzPkRDctb9a7166t6mnUgpSquJX0jn40fKW_7hsTVpBgeFCwE-nlGAqpVKBrblr9Yn2mwHuBR1PxIoc2zLw3PnHKUAa8K9NLsMB894HF4QXPWAMUOM86n7WdFsowv7PNO9EeokSDYSqhualgJLgcDiQ9rEHW-eJb2Vehf4VKWCMAivniHmMV_nU-_UGbQUGuKywvxRGTsWrgWFKEsJdNztcso3SI6BqwsoOjxp0XxyjGAF-2qwpONwoVuexNzsZyVllJm4PrvYiXbLaGqyk-6NcgYxoUr5DZpAcpZ6jH3_0000">
+<p>Gampe DevelopersはDaocasinoが提供する<a href="https://github.com/DaoCasino/dc-sdk-example" target="_blank" rel="noopener">SDK</a>を用いてdaocasinoプロトコル用のゲームを作ります。</p>
+<p>OperatorsはGame Developersが作ったゲームをホスティングしてwebページを用意します。これはまさにオンラインカジノです。</p>
+<p>Game PlayersはOperatorsが用意したwebページにアクセスしプレイしたいゲームをプレイ（賭けを）します。</p>
+<p>BankrollersはGame Playersの賭けを引き受けます。普通プレイヤーの賭けを受けるのはカジノの運営者つまりこの場合Operatorsのように思われますが、daocasinoではこのBankrollersが引き受けます。<br>Game Players側が高額な賭けをしたい場合、受ける側もかなりの額を用意しておかないといけませんがOperatorsは用意する必要はなくbankrollersが用意します。</p>
+<p>AffiliatorsはOperatorsが運営するwebページに客となるGame Playersを呼び込みます。</p>
+<p>テラ銭の一部がBankrollers, Game developers, Affiliatorsに報酬として流れます。</p>
+<p>Daocasino自体は非中央主権なプロトコルなので誰でも自由に上記の役割に誰でもなれます。</p>
+<p>BETはGame Playersが賭けたりBankrollersが賭けを受けたりBankrollers,Game Developers,Affiliatorsが報酬を受けるのに使われます。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/07/what-is-daocasino/" data-id="cjqm0dooh000dkyjagm84o4le" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/daocasino/">daocasino</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/bitbltmemo/2018/12/30/augur-try-create/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Augurマーケット「2019年3月23日に行われるF1オーストラリアGPの優勝チームは？」を作ってみた</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/daocasino/">daocasino</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/bitbltmemo/tags/Augur/" style="font-size: 20px;">Augur</a> <a href="/bitbltmemo/tags/daocasino/" style="font-size: 10px;">daocasino</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2018/12/30/augur-try-create/">Augurマーケット「2019年3月23日に行われるF1オーストラリアGPの優勝チームは？」を作ってみた</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2018/12/20/augur-try-betting/">Augurマーケット「2018年中にETHのレートは500ドルを超える？」に参加してみた</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2018/12/17/augur-interesting-20181217/">気になるAugurのマーケット20181217</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 びっとぶりっと<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/bitbltmemo/" class="mobile-nav-link">Home</a>
+  
+    <a href="/bitbltmemo/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/bitbltmemo/fancybox/jquery.fancybox.css">
+  <script src="/bitbltmemo/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/bitbltmemo/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

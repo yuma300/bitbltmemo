@@ -79,3 +79,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+tag_plantuml:
+  type: static
