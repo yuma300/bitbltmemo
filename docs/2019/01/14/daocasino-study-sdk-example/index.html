@@ -29,7 +29,7 @@ ga('send', 'pageview');
 <meta property="og:description" content="DaocasinoのSDK exampleを動かしてみたでDaocasino SDKのexampleを動かしてみました。今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。  各モジュール説明PlayerとBankrollerこれはモジュールではなくてDaocasinoとはで説明したGame Players">
 <meta property="og:locale" content="jagit">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/bP2nIiKm58RtynJXxa7QIQHq41z0S1I7c1vhQ9k49kMYug1T11UVGH07mTd1jodSvp19Krk4Y_Sk9V_Vx-Jy-QsmDPBCY5iyIWxp4wOuCqAguU5pw5-7nw-XVnlwxw7_sBm_RvvUiWEFvi1LevL4QScvq5VcWZ13X5xQQA-nnQuX4krQjLL0t1a0DECLAv6iJcjsWoqv4mMkoDrokcGD4gPrBJYpGiamxNIoX0fErtZ9j0X_2-v4GhBC55MU_-6uQZ5I_hWDcqBJpehQn05dRkCRD8QLGfOHTNf6u-jeFWRt7o_6d13Z1YD4WYbQiFpIsGcMlnpk0M8Yv_awurAdNFzpjSTCLgsgw_tgJV-fDzsjtdJFUjFTwvrH7vTabCmlXIaZ7T_o6uR6z31jerDGc2wbdPvDLxAhTiJy00Wz2i_-0000">
-<meta property="og:updated_time" content="2019-01-14T03:22:16.315Z">
+<meta property="og:updated_time" content="2019-01-14T03:40:52.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daocasino SDKのモジュール調査">
 <meta name="twitter:description" content="DaocasinoのSDK exampleを動かしてみたでDaocasino SDKのexampleを動かしてみました。今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。  各モジュール説明PlayerとBankrollerこれはモジュールではなくてDaocasinoとはで説明したGame Players">
@@ -111,11 +111,15 @@ ga('send', 'pageview');
 <h1 id="各モジュール説明"><a href="#各モジュール説明" class="headerlink" title="各モジュール説明"></a>各モジュール説明</h1><h2 id="PlayerとBankroller"><a href="#PlayerとBankroller" class="headerlink" title="PlayerとBankroller"></a>PlayerとBankroller</h2><p>これはモジュールではなくて<a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>で説明したGame PlayersとBankrollerです。</p>
 <h2 id="game-application"><a href="#game-application" class="headerlink" title="game application"></a>game application</h2><p>これはゲームのロジック部分です。自分でなにかDaocasino用ゲームを作る場合はこの部分を用意することになります。<br>Daocasino SDKのexampleにおいては、tutorial.jsがこれにあたります。</p>
 <h2 id="dc-webapi"><a href="#dc-webapi" class="headerlink" title="dc-webapi"></a>dc-webapi</h2><p>Daocasino SDKを構成する一つです。<br>Daocasinoプロトコルのインタフェースが用意されています。<br>game applicationからこのdc-webapiが用意したインタフェースを実行していくことでDaocasino用のゲームとして動作します。</p>
+<p><a href="https://github.com/DaoCasino/dc-webapi" target="_blank" rel="noopener">https://github.com/DaoCasino/dc-webapi</a></p>
 <h2 id="dc-core"><a href="#dc-core" class="headerlink" title="dc-core"></a>dc-core</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を行います。<br>ゲームの結果部分とは具体的には、どういうランダムナンバーを生成してPlayerの選択と照らし合わせてPlayerかBankrollerどちらが勝ちなのか判定してその結果PlayerとBankrollerそれぞれの残高がどうなったのか計算します。<br>この処理結果はブロックチェーンには書き込まれずstate channel上で保持されます。</p>
 <p>ゲームの結果部分はPlayer側Bankroller側両方同じロジックで同じタイミングで処理されます。もじどちらかが不正をした場合、当然同じ結果になりません。その場合、はdisuputeというモードに切り替わりどちらが不正しているのかの検証が行われます。</p>
 <p>Player側がこれ以上ゲームを続行する意思がなくゲーム終了となった場合はstate chunnelが閉じられて初めてブロックチェーンにお互いの残高が記録されます。</p>
+<p><a href="https://github.com/DaoCasino/dc-core" target="_blank" rel="noopener">https://github.com/DaoCasino/dc-core</a></p>
 <h2 id="dc-ethereum-utils"><a href="#dc-ethereum-utils" class="headerlink" title="dc-ethereum-utils"></a>dc-ethereum-utils</h2><p>Daocasino SDKを構成する一つです。<br>Ethereumのブロックチェーンにアクセスしてなにかやるときのいろいろな処理をまとめた便利ライブラリです。<br>ランダムナンバーを生成したり、state channelを閉じて結果をブロックチェーンに書き込むときに使われます。</p>
+<p><a href="https://github.com/DaoCasino/dc-ethereum-utils" target="_blank" rel="noopener">https://github.com/DaoCasino/dc-ethereum-utils</a></p>
 <h2 id="dc-messaging"><a href="#dc-messaging" class="headerlink" title="dc-messaging"></a>dc-messaging</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を含めてPlayer側とBankroller側は通信する必要があります。お互いweb socketで通信するのですが、その際IPFSのPubSub機能をつかってweb socketでの双方向リアルタイム通信を実現しています。</p>
+<p><a href="https://github.com/DaoCasino/dc-messaging" target="_blank" rel="noopener">https://github.com/DaoCasino/dc-messaging</a></p>
 <h2 id="Ethereum-network"><a href="#Ethereum-network" class="headerlink" title="Ethereum network"></a>Ethereum network</h2><p>Etheruemブロックチェーンのことです。ランダムナンバーの生成やゲーム終了時点でのPlayerとbankrollerの残高が保存されます。</p>
 <h2 id="IPFS"><a href="#IPFS" class="headerlink" title="IPFS"></a>IPFS</h2><p>PlayerとBankroller間のwebsocket通信を実現するためにこのIPFSのPubSub機能が使われます。</p>
 

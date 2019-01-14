@@ -65,6 +65,8 @@ Daocasino SDKを構成する一つです。
 Daocasinoプロトコルのインタフェースが用意されています。
 game applicationからこのdc-webapiが用意したインタフェースを実行していくことでDaocasino用のゲームとして動作します。
 
+https://github.com/DaoCasino/dc-webapi
+
 ## dc-core
 Daocasino SDKを構成する一つです。
 ゲームの結果部分の処理を行います。
@@ -75,16 +77,20 @@ Daocasino SDKを構成する一つです。
 
 Player側がこれ以上ゲームを続行する意思がなくゲーム終了となった場合はstate chunnelが閉じられて初めてブロックチェーンにお互いの残高が記録されます。
 
+https://github.com/DaoCasino/dc-core
+
 ## dc-ethereum-utils
 Daocasino SDKを構成する一つです。
 Ethereumのブロックチェーンにアクセスしてなにかやるときのいろいろな処理をまとめた便利ライブラリです。
 ランダムナンバーを生成したり、state channelを閉じて結果をブロックチェーンに書き込むときに使われます。
 
+https://github.com/DaoCasino/dc-ethereum-utils
 
 ## dc-messaging
 Daocasino SDKを構成する一つです。
 ゲームの結果部分の処理を含めてPlayer側とBankroller側は通信する必要があります。お互いweb socketで通信するのですが、その際IPFSのPubSub機能をつかってweb socketでの双方向リアルタイム通信を実現しています。
 
+https://github.com/DaoCasino/dc-messaging
 
 ## Ethereum network
 Etheruemブロックチェーンのことです。ランダムナンバーの生成やゲーム終了時点でのPlayerとbankrollerの残高が保存されます。
