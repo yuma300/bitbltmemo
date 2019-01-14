@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-30987034-18', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <title>Daocasino SDKのモジュール調査 | びっとぶりっとメモ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="DaocasinoのSDK exampleを動かしてみたでDaocasino SDKのexampleを動かしてみました。今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。  各モジュール説明PlayerとBankrollerこれはモジュールではなくてDaocasinoとはで説明したGame Players">
+<meta name="keywords" content="Daocasino">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Daocasino SDKのモジュール調査">
+<meta property="og:url" content="http://yuma300.github.io/bitbltmemo/2019/01/14/daocasino-study-sdk-example/index.html">
+<meta property="og:site_name" content="びっとぶりっとメモ">
+<meta property="og:description" content="DaocasinoのSDK exampleを動かしてみたでDaocasino SDKのexampleを動かしてみました。今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。  各モジュール説明PlayerとBankrollerこれはモジュールではなくてDaocasinoとはで説明したGame Players">
+<meta property="og:locale" content="jagit">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/svg/bP2nIiKm58RtynJXxa7QIQHq41z0S1I7c1vhQ9k49kMYug1T11UVGH07mTd1jodSvp19Krk4Y_Sk9V_Vx-Jy-QsmDPBCY5iyIWxp4wOuCqAguU5pw5-7nw-XVnlwxw7_sBm_RvvUiWEFvi1LevL4QScvq5VcWZ13X5xQQA-nnQuX4krQjLL0t1a0DECLAv6iJcjsWoqv4mMkoDrokcGD4gPrBJYpGiamxNIoX0fErtZ9j0X_2-v4GhBC55MU_-6uQZ5I_hWDcqBJpehQn05dRkCRD8QLGfOHTNf6u-jeFWRt7o_6d13Z1YD4WYbQiFpIsGcMlnpk0M8Yv_awurAdNFzpjSTCLgsgw_tgJV-fDzsjtdJFUjFTwvrH7vTabCmlXIaZ7T_o6uR6z31jerDGc2wbdPvDLxAhTiJy00Wz2i_-0000">
+<meta property="og:updated_time" content="2019-01-14T03:22:16.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Daocasino SDKのモジュール調査">
+<meta name="twitter:description" content="DaocasinoのSDK exampleを動かしてみたでDaocasino SDKのexampleを動かしてみました。今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。  各モジュール説明PlayerとBankrollerこれはモジュールではなくてDaocasinoとはで説明したGame Players">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/svg/bP2nIiKm58RtynJXxa7QIQHq41z0S1I7c1vhQ9k49kMYug1T11UVGH07mTd1jodSvp19Krk4Y_Sk9V_Vx-Jy-QsmDPBCY5iyIWxp4wOuCqAguU5pw5-7nw-XVnlwxw7_sBm_RvvUiWEFvi1LevL4QScvq5VcWZ13X5xQQA-nnQuX4krQjLL0t1a0DECLAv6iJcjsWoqv4mMkoDrokcGD4gPrBJYpGiamxNIoX0fErtZ9j0X_2-v4GhBC55MU_-6uQZ5I_hWDcqBJpehQn05dRkCRD8QLGfOHTNf6u-jeFWRt7o_6d13Z1YD4WYbQiFpIsGcMlnpk0M8Yv_awurAdNFzpjSTCLgsgw_tgJV-fDzsjtdJFUjFTwvrH7vTabCmlXIaZ7T_o6uR6z31jerDGc2wbdPvDLxAhTiJy00Wz2i_-0000">
+  
+    <link rel="alternate" href="/bitbltmemo/atom.xml" title="びっとぶりっとメモ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/bitbltmemo/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/bitbltmemo/" id="logo">びっとぶりっとメモ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/bitbltmemo/" id="subtitle">Dappsとか</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/">Home</a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/bitbltmemo/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yuma300.github.io/bitbltmemo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-daocasino-study-sdk-example" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/" class="article-date">
+  <time datetime="2019-01-13T15:39:31.000Z" itemprop="datePublished">2019-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Daocasino SDKのモジュール調査
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/">DaocasinoのSDK exampleを動かしてみた</a>でDaocasino SDKのexampleを動かしてみました。<br>今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。</p>
+<img src="http://www.plantuml.com/plantuml/svg/bP2nIiKm58RtynJXxa7QIQHq41z0S1I7c1vhQ9k49kMYug1T11UVGH07mTd1jodSvp19Krk4Y_Sk9V_Vx-Jy-QsmDPBCY5iyIWxp4wOuCqAguU5pw5-7nw-XVnlwxw7_sBm_RvvUiWEFvi1LevL4QScvq5VcWZ13X5xQQA-nnQuX4krQjLL0t1a0DECLAv6iJcjsWoqv4mMkoDrokcGD4gPrBJYpGiamxNIoX0fErtZ9j0X_2-v4GhBC55MU_-6uQZ5I_hWDcqBJpehQn05dRkCRD8QLGfOHTNf6u-jeFWRt7o_6d13Z1YD4WYbQiFpIsGcMlnpk0M8Yv_awurAdNFzpjSTCLgsgw_tgJV-fDzsjtdJFUjFTwvrH7vTabCmlXIaZ7T_o6uR6z31jerDGc2wbdPvDLxAhTiJy00Wz2i_-0000">
+<h1 id="各モジュール説明"><a href="#各モジュール説明" class="headerlink" title="各モジュール説明"></a>各モジュール説明</h1><h2 id="PlayerとBankroller"><a href="#PlayerとBankroller" class="headerlink" title="PlayerとBankroller"></a>PlayerとBankroller</h2><p>これはモジュールではなくて<a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>で説明したGame PlayersとBankrollerです。</p>
+<h2 id="game-application"><a href="#game-application" class="headerlink" title="game application"></a>game application</h2><p>これはゲームのロジック部分です。自分でなにかDaocasino用ゲームを作る場合はこの部分を用意することになります。<br>Daocasino SDKのexampleにおいては、tutorial.jsがこれにあたります。</p>
+<h2 id="dc-webapi"><a href="#dc-webapi" class="headerlink" title="dc-webapi"></a>dc-webapi</h2><p>Daocasino SDKを構成する一つです。<br>Daocasinoプロトコルのインタフェースが用意されています。<br>game applicationからこのdc-webapiが用意したインタフェースを実行していくことでDaocasino用のゲームとして動作します。</p>
+<h2 id="dc-core"><a href="#dc-core" class="headerlink" title="dc-core"></a>dc-core</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を行います。<br>ゲームの結果部分とは具体的には、どういうランダムナンバーを生成してPlayerの選択と照らし合わせてPlayerかBankrollerどちらが勝ちなのか判定してその結果PlayerとBankrollerそれぞれの残高がどうなったのか計算します。<br>この処理結果はブロックチェーンには書き込まれずstate channel上で保持されます。</p>
+<p>ゲームの結果部分はPlayer側Bankroller側両方同じロジックで同じタイミングで処理されます。もじどちらかが不正をした場合、当然同じ結果になりません。その場合、はdisuputeというモードに切り替わりどちらが不正しているのかの検証が行われます。</p>
+<p>Player側がこれ以上ゲームを続行する意思がなくゲーム終了となった場合はstate chunnelが閉じられて初めてブロックチェーンにお互いの残高が記録されます。</p>
+<h2 id="dc-ethereum-utils"><a href="#dc-ethereum-utils" class="headerlink" title="dc-ethereum-utils"></a>dc-ethereum-utils</h2><p>Daocasino SDKを構成する一つです。<br>Ethereumのブロックチェーンにアクセスしてなにかやるときのいろいろな処理をまとめた便利ライブラリです。<br>ランダムナンバーを生成したり、state channelを閉じて結果をブロックチェーンに書き込むときに使われます。</p>
+<h2 id="dc-messaging"><a href="#dc-messaging" class="headerlink" title="dc-messaging"></a>dc-messaging</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を含めてPlayer側とBankroller側は通信する必要があります。お互いweb socketで通信するのですが、その際IPFSのPubSub機能をつかってweb socketでの双方向リアルタイム通信を実現しています。</p>
+<h2 id="Ethereum-network"><a href="#Ethereum-network" class="headerlink" title="Ethereum network"></a>Ethereum network</h2><p>Etheruemブロックチェーンのことです。ランダムナンバーの生成やゲーム終了時点でのPlayerとbankrollerの残高が保存されます。</p>
+<h2 id="IPFS"><a href="#IPFS" class="headerlink" title="IPFS"></a>IPFS</h2><p>PlayerとBankroller間のwebsocket通信を実現するためにこのIPFSのPubSub機能が使われます。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/14/daocasino-study-sdk-example/" data-id="cjqvoiyoq0000mg688ftftc7x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DaocasinoのSDK exampleを動かしてみた</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/bitbltmemo/tags/Augur/" style="font-size: 10px;">Augur</a> <a href="/bitbltmemo/tags/Daocasino/" style="font-size: 10px;">Daocasino</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/">Daocasino SDKのモジュール調査</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/">DaocasinoのSDK exampleを動かしてみた</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2018/12/30/augur-try-create/">Augurマーケット「2019年3月23日に行われるF1オーストラリアGPの優勝チームは？」を作ってみた</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2018/12/20/augur-try-betting/">Augurマーケット「2018年中にETHのレートは500ドルを超える？」に参加してみた</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 びっとぶりっと<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/bitbltmemo/" class="mobile-nav-link">Home</a>
+  
+    <a href="/bitbltmemo/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/bitbltmemo/fancybox/jquery.fancybox.css">
+  <script src="/bitbltmemo/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/bitbltmemo/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

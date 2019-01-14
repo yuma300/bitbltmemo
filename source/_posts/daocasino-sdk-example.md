@@ -1,7 +1,7 @@
 ---
 title: DaocasinoのSDK exampleを動かしてみた
 date: 2019-01-08 00:45:37
-tags: daocasino
+tags: Daocasino
 ---
 
 [Daocasinoとは](/bitbltmemo/2019/01/07/what-is-daocasino/)でDaocasinoがどのようなものかについて説明しました。

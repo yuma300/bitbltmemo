@@ -79,6 +79,56 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-daocasino-study-sdk-example" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/" class="article-date">
+  <time datetime="2019-01-13T15:39:31.000Z" itemprop="datePublished">2019-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/">Daocasino SDKのモジュール調査</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/">DaocasinoのSDK exampleを動かしてみた</a>でDaocasino SDKのexampleを動かしてみました。<br>今回の記事ではDaocasino SDKがどのようなモジュール構成になっていてモジュール間でどのようなやりとりをしているのか調査結果を書きます。</p>
+<img src="http://www.plantuml.com/plantuml/svg/bP2nIiKm58RtynJXxa7QIQHq41z0S1I7c1vhQ9k49kMYug1T11UVGH07mTd1jodSvp19Krk4Y_Sk9V_Vx-Jy-QsmDPBCY5iyIWxp4wOuCqAguU5pw5-7nw-XVnlwxw7_sBm_RvvUiWEFvi1LevL4QScvq5VcWZ13X5xQQA-nnQuX4krQjLL0t1a0DECLAv6iJcjsWoqv4mMkoDrokcGD4gPrBJYpGiamxNIoX0fErtZ9j0X_2-v4GhBC55MU_-6uQZ5I_hWDcqBJpehQn05dRkCRD8QLGfOHTNf6u-jeFWRt7o_6d13Z1YD4WYbQiFpIsGcMlnpk0M8Yv_awurAdNFzpjSTCLgsgw_tgJV-fDzsjtdJFUjFTwvrH7vTabCmlXIaZ7T_o6uR6z31jerDGc2wbdPvDLxAhTiJy00Wz2i_-0000">
+<h1 id="各モジュール説明"><a href="#各モジュール説明" class="headerlink" title="各モジュール説明"></a>各モジュール説明</h1><h2 id="PlayerとBankroller"><a href="#PlayerとBankroller" class="headerlink" title="PlayerとBankroller"></a>PlayerとBankroller</h2><p>これはモジュールではなくて<a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>で説明したGame PlayersとBankrollerです。</p>
+<h2 id="game-application"><a href="#game-application" class="headerlink" title="game application"></a>game application</h2><p>これはゲームのロジック部分です。自分でなにかDaocasino用ゲームを作る場合はこの部分を用意することになります。<br>Daocasino SDKのexampleにおいては、tutorial.jsがこれにあたります。</p>
+<h2 id="dc-webapi"><a href="#dc-webapi" class="headerlink" title="dc-webapi"></a>dc-webapi</h2><p>Daocasino SDKを構成する一つです。<br>Daocasinoプロトコルのインタフェースが用意されています。<br>game applicationからこのdc-webapiが用意したインタフェースを実行していくことでDaocasino用のゲームとして動作します。</p>
+<h2 id="dc-core"><a href="#dc-core" class="headerlink" title="dc-core"></a>dc-core</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を行います。<br>ゲームの結果部分とは具体的には、どういうランダムナンバーを生成してPlayerの選択と照らし合わせてPlayerかBankrollerどちらが勝ちなのか判定してその結果PlayerとBankrollerそれぞれの残高がどうなったのか計算します。<br>この処理結果はブロックチェーンには書き込まれずstate channel上で保持されます。</p>
+<p>ゲームの結果部分はPlayer側Bankroller側両方同じロジックで同じタイミングで処理されます。もじどちらかが不正をした場合、当然同じ結果になりません。その場合、はdisuputeというモードに切り替わりどちらが不正しているのかの検証が行われます。</p>
+<p>Player側がこれ以上ゲームを続行する意思がなくゲーム終了となった場合はstate chunnelが閉じられて初めてブロックチェーンにお互いの残高が記録されます。</p>
+<h2 id="dc-ethereum-utils"><a href="#dc-ethereum-utils" class="headerlink" title="dc-ethereum-utils"></a>dc-ethereum-utils</h2><p>Daocasino SDKを構成する一つです。<br>Ethereumのブロックチェーンにアクセスしてなにかやるときのいろいろな処理をまとめた便利ライブラリです。<br>ランダムナンバーを生成したり、state channelを閉じて結果をブロックチェーンに書き込むときに使われます。</p>
+<h2 id="dc-messaging"><a href="#dc-messaging" class="headerlink" title="dc-messaging"></a>dc-messaging</h2><p>Daocasino SDKを構成する一つです。<br>ゲームの結果部分の処理を含めてPlayer側とBankroller側は通信する必要があります。お互いweb socketで通信するのですが、その際IPFSのPubSub機能をつかってweb socketでの双方向リアルタイム通信を実現しています。</p>
+<h2 id="Ethereum-network"><a href="#Ethereum-network" class="headerlink" title="Ethereum network"></a>Ethereum network</h2><p>Etheruemブロックチェーンのことです。ランダムナンバーの生成やゲーム終了時点でのPlayerとbankrollerの残高が保存されます。</p>
+<h2 id="IPFS"><a href="#IPFS" class="headerlink" title="IPFS"></a>IPFS</h2><p>PlayerとBankroller間のwebsocket通信を実現するためにこのIPFSのPubSub機能が使われます。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/14/daocasino-study-sdk-example/" data-id="cjqvoiyoq0000mg688ftftc7x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-daocasino-sdk-example" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/" class="article-date">
@@ -134,10 +184,10 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/08/daocasino-sdk-example/" data-id="cjqn7xz1i00008ajal71foyrz" class="article-share-link">Share</a>
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/08/daocasino-sdk-example/" data-id="cjqvoiyp60001mg68u89p7g3v" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/daocasino/">daocasino</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
 
     </footer>
   </div>
@@ -189,10 +239,10 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/07/what-is-daocasino/" data-id="cjqm0dooh000dkyjagm84o4le" class="article-share-link">Share</a>
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/01/07/what-is-daocasino/" data-id="cjqvoiypi0003mg68dewiq20g" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/daocasino/">daocasino</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
 
     </footer>
   </div>
@@ -245,7 +295,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/30/augur-try-create/" data-id="cjqm07xp10006kyjau8ofj9el" class="article-share-link">Share</a>
+      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/30/augur-try-create/" data-id="cjqvoiyrj000amg68jezung3o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li></ul>
@@ -293,7 +343,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/20/augur-try-betting/" data-id="cjqm07xp30007kyjaldq8mpjp" class="article-share-link">Share</a>
+      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/20/augur-try-betting/" data-id="cjqvoiyrs000cmg68ltcxqqrz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li></ul>
@@ -342,7 +392,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/17/augur-interesting-20181217/" data-id="cjqm07xoj0001kyjapdauy3mu" class="article-share-link">Share</a>
+      <a data-url="http://yuma300.github.io/bitbltmemo/2018/12/17/augur-interesting-20181217/" data-id="cjqvoiyrb0009mg68f8b7vthq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li></ul>
@@ -367,7 +417,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/daocasino/">daocasino</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li></ul>
     </div>
   </div>
 
@@ -377,7 +427,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/bitbltmemo/tags/Augur/" style="font-size: 20px;">Augur</a> <a href="/bitbltmemo/tags/daocasino/" style="font-size: 10px;">daocasino</a>
+      <a href="/bitbltmemo/tags/Augur/" style="font-size: 10px;">Augur</a> <a href="/bitbltmemo/tags/Daocasino/" style="font-size: 10px;">Daocasino</a>
     </div>
   </div>
 
@@ -399,6 +449,10 @@ ga('send', 'pageview');
       <ul>
         
           <li>
+            <a href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/">Daocasino SDKのモジュール調査</a>
+          </li>
+        
+          <li>
             <a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/">DaocasinoのSDK exampleを動かしてみた</a>
           </li>
         
@@ -412,10 +466,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/bitbltmemo/2018/12/20/augur-try-betting/">Augurマーケット「2018年中にETHのレートは500ドルを超える？」に参加してみた</a>
-          </li>
-        
-          <li>
-            <a href="/bitbltmemo/2018/12/17/augur-interesting-20181217/">気になるAugurのマーケット20181217</a>
           </li>
         
       </ul>

@@ -1,7 +1,7 @@
 ---
 title: Daocasinoとは
 date: 2019-01-07 15:53:38
-tags: daocasino
+tags: Daocasino
 ---
 
 Ethereum上で動作するギャンブル用プロトコル[daocasino](https://dao.casino/)の説明をします。
