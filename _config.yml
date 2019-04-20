@@ -82,3 +82,11 @@ deploy:
 
 tag_plantuml:
   type: static
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 50
+
+sitemap:
+  path: sitemap.xml

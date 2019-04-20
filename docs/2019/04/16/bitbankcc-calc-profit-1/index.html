@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-30987034-18', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <title>2018年のbitbankccでの損益を総平均法を用いて簡単に計算する | びっとぶりっとメモ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="仮想通貨のトレードをしていると課題になってくるのが損益の計算ですね。一体自分は得をしたのか損をしたのか。。。。この記事では2018年からbitbankccで仮想通貨のトレードを始めた人を対象にものすごく簡単に総平均法で2018年の損益を計算する方法を書きます。総平均法とは何なのかについてはアエリアルパートナーさんのこちらをご覧ください。 この記事においては以下の方を対象としています  bitban">
+<meta name="keywords" content="Trade">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018年のbitbankccでの損益を総平均法を用いて簡単に計算する">
+<meta property="og:url" content="http://yuma300.github.io/bitbltmemo/2019/04/16/bitbankcc-calc-profit-1/index.html">
+<meta property="og:site_name" content="びっとぶりっとメモ">
+<meta property="og:description" content="仮想通貨のトレードをしていると課題になってくるのが損益の計算ですね。一体自分は得をしたのか損をしたのか。。。。この記事では2018年からbitbankccで仮想通貨のトレードを始めた人を対象にものすごく簡単に総平均法で2018年の損益を計算する方法を書きます。総平均法とは何なのかについてはアエリアルパートナーさんのこちらをご覧ください。 この記事においては以下の方を対象としています  bitban">
+<meta property="og:locale" content="jagit">
+<meta property="og:updated_time" content="2019-04-20T03:12:10.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018年のbitbankccでの損益を総平均法を用いて簡単に計算する">
+<meta name="twitter:description" content="仮想通貨のトレードをしていると課題になってくるのが損益の計算ですね。一体自分は得をしたのか損をしたのか。。。。この記事では2018年からbitbankccで仮想通貨のトレードを始めた人を対象にものすごく簡単に総平均法で2018年の損益を計算する方法を書きます。総平均法とは何なのかについてはアエリアルパートナーさんのこちらをご覧ください。 この記事においては以下の方を対象としています  bitban">
+  
+    <link rel="alternate" href="/bitbltmemo/atom.xml" title="びっとぶりっとメモ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/bitbltmemo/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/bitbltmemo/" id="logo">びっとぶりっとメモ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/bitbltmemo/" id="subtitle">Dappsとか</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/">Home</a>
+        
+          <a class="main-nav-link" href="/bitbltmemo/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/bitbltmemo/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yuma300.github.io/bitbltmemo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bitbankcc-calc-profit-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/bitbltmemo/2019/04/16/bitbankcc-calc-profit-1/" class="article-date">
+  <time datetime="2019-04-16T12:21:06.000Z" itemprop="datePublished">2019-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2018年のbitbankccでの損益を総平均法を用いて簡単に計算する
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>仮想通貨のトレードをしていると課題になってくるのが損益の計算ですね。<br>一体自分は得をしたのか損をしたのか。。。。<br>この記事では2018年からbitbankccで仮想通貨のトレードを始めた人を対象にものすごく簡単に総平均法で<br>2018年の損益を計算する方法を書きます。<br>総平均法とは何なのかについてはアエリアルパートナーさんの<a href="https://www.aerial-p.com/media/cryptocurrency-tax/moving-weighted-avarage.html" target="_blank" rel="noopener">こちら</a>をご覧ください。</p>
+<p>この記事においては以下の方を対象としています</p>
+<ul>
+<li>bitbankccの口座に日本円入金を入れたのが2018年から</li>
+<li>現物取引のみ</li>
+<li>他の取引所への入出金を行っていない</li>
+<li>JPY建てペアのみの取引を行っている</li>
+</ul>
+<p>以下手順</p>
+<ol>
+<li><p>年間取引報告書をダウンロードする<br><a href="https://app.bitbank.cc/account/portfolioにアクセス年間取引報告書をダウンロードします。" target="_blank" rel="noopener">https://app.bitbank.cc/account/portfolioにアクセス年間取引報告書をダウンロードします。</a></p>
+</li>
+<li><p>googleスプレッドシートに年間取引報告書をコピペする</p>
+</li>
+</ol>
+<h1 id="平均購入単価、平均売却単価、損益の列を追加する"><a href="#平均購入単価、平均売却単価、損益の列を追加する" class="headerlink" title="平均購入単価、平均売却単価、損益の列を追加する"></a>平均購入単価、平均売却単価、損益の列を追加する</h1><p>それぞれの列は以下の計算式で算出できます。<br>平均購入単価 = JPY建て年中購入金額 / JPY建て年中購入数量<br>平均売却単価 = JPY建て年中売却金額 / JPY建て年中売却数量<br>損益 = (平均売却単価 - 平均購入単価) * JPY建て年中売却数量</p>
+<p>以下はサンプルとなります。<br><a href="https://docs.google.com/spreadsheets/d/1i9jKtzIVNqKSlEymLph4Y-rL5-7Ww1fjba8nF7PftxA/edit?usp=sharing" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/d/1i9jKtzIVNqKSlEymLph4Y-rL5-7Ww1fjba8nF7PftxA/edit?usp=sharing</a></p>
+<p>上記のサンプルでは100万円入金してBTCJPYで複数回売買を行い平均単価40万円でトータル25BTC購入して、<br>平均単価46万円でトータル20BTC売却した結果、120万円の利益が出た事になります。</p>
+<p>総平均法においてはここで出した平均購入単価は来年以降でも損益計算に使うのでとても重要です。</p>
+<p>＃注意事項<br>この記事は計算結果を保証するものではありません、この記事の手順で算出した計算結果を使った結果<br>損害を被っても責任を負いかねます。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuma300.github.io/bitbltmemo/2019/04/16/bitbankcc-calc-profit-1/" data-id="cjuoxgwbp00017i68dwecduee" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/bitbltmemo/tags/Trade/">Trade</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/bitbltmemo/2019/01/23/daocasino-state-channel/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">daocasino_state_channel</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Augur/">Augur</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Daocasino/">Daocasino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/bitbltmemo/tags/Trade/">Trade</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/bitbltmemo/tags/Augur/" style="font-size: 20px;">Augur</a> <a href="/bitbltmemo/tags/Daocasino/" style="font-size: 20px;">Daocasino</a> <a href="/bitbltmemo/tags/Trade/" style="font-size: 10px;">Trade</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/bitbltmemo/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/bitbltmemo/2019/04/16/bitbankcc-calc-profit-1/">2018年のbitbankccでの損益を総平均法を用いて簡単に計算する</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/23/daocasino-state-channel/">daocasino_state_channel</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/14/daocasino-study-sdk-example/">Daocasino SDKのモジュール調査</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/08/daocasino-sdk-example/">DaocasinoのSDK exampleを動かしてみた</a>
+          </li>
+        
+          <li>
+            <a href="/bitbltmemo/2019/01/07/what-is-daocasino/">Daocasinoとは</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 びっとぶりっと<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/bitbltmemo/" class="mobile-nav-link">Home</a>
+  
+    <a href="/bitbltmemo/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/bitbltmemo/fancybox/jquery.fancybox.css">
+  <script src="/bitbltmemo/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/bitbltmemo/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
